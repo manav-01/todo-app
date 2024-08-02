@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import Sidebar from "@/components/Sidebar";
-import MainDashboard from "/pages/dashboard";
+import MainDashboard from "./Dashboard";
 import ManageTodoMaker from "@/components/ManageTodoMaker";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
