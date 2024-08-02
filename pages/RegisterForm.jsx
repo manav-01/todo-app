@@ -135,7 +135,7 @@ export default function RegisterForm() {
                     ref={submitButtonId}
                     disabled={isInputEmpty}
                     >
-                    {children="Login"}
+                  Register 
                     </Button>
                 </form>
 
