@@ -45,8 +45,8 @@ function FeaturedCard() {
         <div class="flex flex-col text-justify">
           <p class="font-semibold">Access Anywhere</p>
           <p class="tracking-tight text-left">
-            Sync your notes across all devices. Stay productive whether you're
-            on your phone, tablet, or computer.
+            Sync your notes across all devices. Stay productive whether
+            you&lsquo;re on your phone, tablet, or computer.
           </p>
         </div>
       </div>
