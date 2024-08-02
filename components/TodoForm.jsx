@@ -135,7 +135,7 @@ function TodoForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <Input
-        classname="w-full bg-transparent font-barlow font-semibold text-4xl outline-none border-none mb-8"
+        classname="w-full bg-transparent font-barlow font-semibold text-4xl outline-none  mb-8 "
         type="text"
         placeholder="Title"
         ref={inputRef}

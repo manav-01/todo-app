@@ -44,7 +44,7 @@ function SignUpForm() {
       })
 
       const res = signIpRes;
-      console.log("signIpRes" ,res);
+      // console.log("signIpRes" ,res);
 
       if(signIpRes.error){
         setError(`Invalid Credentials : ${signIpRes.error}`);
