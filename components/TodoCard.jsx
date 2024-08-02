@@ -7,6 +7,7 @@ import { HiPencilAlt } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { updateCredantials } from '@/featured/todoHandlerSlice';
 import parse from "html-react-parser";
+
 function TodoCard({_id,title,description,priority,deadline,updatedAt}) {
   const dispatch = useDispatch();
   const editId = useRef(null);
@@ -86,6 +87,7 @@ function TodoCard({_id,title,description,priority,deadline,updatedAt}) {
     //  <!-- Component of card  -->
     <div
       id={_id}
+      key={_id}
       className="bg-active-bg2 border--btn p-4 rounded-md flex flex-col gap-4 items-baseline relative hover-trigger"
     >
       <div className="absolute bottom-1 right-1 flex gap-2 hidden hover-content">

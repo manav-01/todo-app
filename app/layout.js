@@ -3,8 +3,6 @@ import "./globals.css";
 
 
 // import components
-import LoginForm from "../pages/SignInForm.jsx"
-import RegisterForm from "@/pages/RegisterForm";
 import { AuthProvider } from "./Providers";
 
 
