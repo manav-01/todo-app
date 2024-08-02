@@ -1,12 +1,11 @@
 import connectDB from "@/database";
-import { User } from "@/models/user.model";
 import { Todo } from "@/models/todo.model";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   const { userId } = await request.json();
   await connectDB();
-  console.log("User Id ",userId)
+ 
   const todos = await Todo.find({userId});
     
   return NextResponse.json({ todos });

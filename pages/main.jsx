@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import Sidebar from "@/components/Sidebar";
-import MainDashboard from "@/pages/dashboard";
+import MainDashboard from "/pages/dashboard";
 import ManageTodoMaker from "@/components/ManageTodoMaker";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,8 +76,7 @@ const TodoComponent = () => {
   const userId = useSelector((state) => state.auth?.userData?.id);
   const emailData = session?.user?.email;
 
-    console.log(userId);
-
+   
   // Fetch and set user data based on email
   useEffect(() => {
     if (emailData) {
@@ -106,7 +105,7 @@ const TodoComponent = () => {
     if (userId) {
       const fetchData = async () => {
         const data = await fetchAllData(userId);
-        console.log("data",data.todos)
+       
         if (data) {
           dispatch(addData(data.todos));
         }
