@@ -10,7 +10,7 @@ const todoDataSlice = createSlice({
     reducers: {
         addData: (state,action) =>{
             state.todos = []
-            state.todos.push(...action.payload);
+            if (action.payload) {state.todos.push(...action.payload)};
         }
     }
 })
