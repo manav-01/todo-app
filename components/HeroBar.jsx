@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 function HeroBar() {
   
-  const name = useSelector(state => state.auth.userData?.fullName || "Joe") 
+  const name = useSelector(state => state.auth?.userData?.fullName || "Joe") 
 
   function capitalizeFirstWord(name) {
   const firstWord = name.split(" ")[0];
