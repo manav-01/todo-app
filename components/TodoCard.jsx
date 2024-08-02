@@ -86,8 +86,8 @@ function TodoCard({_id,title,description,priority,deadline,updatedAt}) {
   return (
     //  <!-- Component of card  -->
     <div
-      id={_id}
       key={_id}
+      id={_id}
       className="bg-active-bg2 border--btn p-4 rounded-md flex flex-col gap-4 items-baseline relative hover-trigger"
     >
       <div className="absolute bottom-1 right-1 flex gap-2 hidden hover-content">
@@ -95,7 +95,7 @@ function TodoCard({_id,title,description,priority,deadline,updatedAt}) {
         <button
           href={""}
           ref={editId}
-          data-todoId={_id}
+          data-todoid={_id}
           onClick={onEditeHandler}
         >
           <HiPencilAlt size={24} />

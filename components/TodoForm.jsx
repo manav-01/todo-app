@@ -8,7 +8,7 @@ import DeadlineImg from "/assert/dashboard/task_model/deadline.png";
 import DescriptionImg from "/assert/dashboard/task_model/description.png";
 import AddImg from "/assert/dashboard/task_model/add.png";
 import NewTaskImg from "/assert/dashboard/sidebar/new-task-pluse.png";
-import AutoExpandTextarea from "./AutoExpandTextarea";
+
 import Select from "./Select";
 import Input from "./Input";
 import RTE from "./RTE";
@@ -199,11 +199,7 @@ function TodoForm({
           />
           <label>Description</label>
         </div>
-        {/* <AutoExpandTextarea
-          className="bg-transparent outline-none pl-2 w-full text-justify"
-          ref={textAreaRef}
-          {...register("description", { required: true })}
-        /> */}
+        
         <RTE
           name="description"
           control={control}

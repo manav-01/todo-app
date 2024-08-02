@@ -6,12 +6,10 @@ import { Provider } from "react-redux";
 
 export default function Dashboard() { 
     return (
-        <div className= "bg-red-200 h-dvh w-full">
-            <Provider store={store}>
-            
-            <Main/>
-            </Provider>
-        </div>
-
+      <div className="bg-active-bg2 min-h-dvh w-full">
+        <Provider store={store}>
+          <Main />
+        </Provider>
+      </div>
     );
 }

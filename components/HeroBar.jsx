@@ -26,11 +26,11 @@ function HeroBar() {
   }
 
   return (
-    <div class="flex justify-between mb-4" id="title">
-      <p class="text-4xl font-semibold font-barlow text-black">
+    <div className="flex justify-between mb-4" id="title">
+      <p className="text-4xl font-semibold font-barlow text-black">
         {getGreeting()}, {capitalizeFirstWord(name)}!
       </p>
-      <p class="flex justify-between gap-2 items-center text-black">
+      <p className="flex justify-between gap-2 items-center text-black">
         Help & feedback
         <Image src={HelpFeedbackImg} alt="Help & Feedback" />
       </p>

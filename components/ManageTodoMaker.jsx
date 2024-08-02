@@ -158,7 +158,7 @@ function ManageTodoMaker() {
         <p>Start writing, or drag your own files here.</p>
       </div>
 
-      {/* <AutoExpandTextarea ref={ref} /> */}
+    
     </aside>
   );
 }

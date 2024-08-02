@@ -25,20 +25,20 @@ function TodoSection() {
    
 
   return (
-    <div class="grid grid-flow-row grid-cols-4 gap-4 bg-white p-3 rounded-md mb-4">
+    <div className="grid grid-flow-row grid-cols-4 gap-4 bg-white p-3 rounded-md mb-4">
       {/* <!-- 1 First TODo Section  --> */}
-      <div class="flex flex-col justify-start gap-4">
+      <div className="flex flex-col justify-start gap-4">
         {/* <!-- 1 --> */}
-        <div class="flex justify-between items-center text-lg ">
+        <div className="flex justify-between items-center text-lg ">
           <p>To do</p>
           <Image src={shorDataImg} alt="To do" />
         </div>
-        <div id="todo_loader" class="flex flex-col gap-4">
+        <div id="todo_loader" className="flex flex-col gap-4">
           {/* <!-- Component of card  --> */}
 
           {data?.map((todo) => {
             if (todo.status === "To do") {
-              return <TodoCard {...todo} />;
+              return <TodoCard key={todo["_id"]} {...todo} />;
             }
           })}
         </div>
@@ -46,7 +46,7 @@ function TodoSection() {
         {/* <!-- Add New Component  --> */}
         <button
          
-          class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
+          className="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
           type="submit"
           data-status="To do"
           onClick={btnEventHandler}
@@ -57,17 +57,17 @@ function TodoSection() {
       </div>
 
       {/* <!-- 2 In Progress --> */}
-      <div class="flex flex-col justify-start gap-4">
+      <div className="flex flex-col justify-start gap-4">
         {/* <!-- 1 --> */}
-        <div class="flex justify-between items-center text-lg ">
+        <div className="flex justify-between items-center text-lg ">
           <p>In Progress</p>
           <Image src={shorDataImg} alt="In Progress" />
         </div>
-        <div id="in_progress_loader" class="flex flex-col gap-4">
+        <div id="in_progress_loader" className="flex flex-col gap-4">
           {/* <!-- Component of card  --> */}
           {data?.map((todo) => {
             if (todo.status === "In Progress") {
-              return <TodoCard {...todo} />;
+              return <TodoCard key={todo["_id"]} {...todo} />;
             }
           })}
         </div>
@@ -75,7 +75,7 @@ function TodoSection() {
         {/* <!-- Button of Add New Component  --> */}
         <button
           
-          class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
+          className="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
           type="submit"
           data-status="In Progress"
           onClick={btnEventHandler}
@@ -86,17 +86,17 @@ function TodoSection() {
       </div>
 
       {/* <!-- 3 Under View --> */}
-      <div class="flex flex-col justify-start gap-4">
+      <div className="flex flex-col justify-start gap-4">
         {/* <!-- 1 --> */}
-        <div class="flex justify-between items-center text-lg ">
+        <div className="flex justify-between items-center text-lg ">
           <p>Under View</p>
           <Image src={shorDataImg} alt="Under View" />
         </div>
-        <div id="under_view_loader" class="flex flex-col gap-4">
+        <div id="under_view_loader" className="flex flex-col gap-4">
           {/* <!-- Component of card  --> */}
           {data?.map((todo) => {
             if (todo.status === "Under Review") {
-              return <TodoCard {...todo} />;
+              return <TodoCard key={todo["_id"]}  {...todo} />;
             }
           })}
         </div>
@@ -104,7 +104,7 @@ function TodoSection() {
         {/* <!-- Add New Component  --> */}
         <button
           
-          class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
+          className="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
           type="submit"
           data-status="Under Review"
           onClick={btnEventHandler}
@@ -116,17 +116,17 @@ function TodoSection() {
 
       {/* <!-- 4 Finished --> */}
 
-      <div class="flex flex-col justify-start gap-4 ">
+      <div className="flex flex-col justify-start gap-4 ">
         {/* <!-- 1 --> */}
-        <div class="flex justify-between items-center text-lg ">
+        <div className="flex justify-between items-center text-lg ">
           <p>Finished</p>
           <Image src={shorDataImg} alt="To do" />
         </div>
-        <div id="finished_loader" class="flex flex-col gap-4">
+        <div id="finished_loader" className="flex flex-col gap-4">
           {/* <!-- Component of card  --> */}
           {data?.map((todo) => {
             if (todo.status === "Finished") {
-              return <TodoCard {...todo} />;
+              return <TodoCard key={todo["_id"]} {...todo} />;
             }
           })}
         </div>
@@ -135,7 +135,7 @@ function TodoSection() {
 
         <button
           
-          class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
+          className="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
           type="submit"
           data-status="Finished"
           onClick={btnEventHandler}

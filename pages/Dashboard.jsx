@@ -7,7 +7,7 @@ import TodoSection from '@/components/TodoSection'
 
 function Dashboard() {
   return (
-     <main class="bg-active-bg ml-[260px] p-4 ">
+     <main className="bg-active-bg ml-[260px] p-4 ">
       
       {/* Hero Bar  */}
       <HeroBar/>
