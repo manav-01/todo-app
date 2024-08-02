@@ -105,10 +105,10 @@ function TodoCard({_id,title,description,priority,deadline,updatedAt}) {
         <p className="text-left font-medium text-wrap">
           {title ? title : "Implement User Authentication"}
         </p>
-        <p className="text-left text-sm">
+        <div className="text-left text-sm">
           {parse(description) ??
             "Develop and integrate user authentication using email and password."}
-        </p>
+        </div>
         <p
           className={`text-xs ${getBgClass(
             priority

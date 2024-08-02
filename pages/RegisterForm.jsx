@@ -132,10 +132,11 @@ export default function RegisterForm() {
                       isInputEmpty ? "cursor-not-allowed " : ""
                     }`}
                     type="submit"
-                    children="Login"
                     ref={submitButtonId}
                     disabled={isInputEmpty}
-                  />
+                    >
+                    {children="Login"}
+                    </Button>
                 </form>
 
                 <p className=" mt-4 text-[#606060] text-center">

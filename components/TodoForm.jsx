@@ -51,11 +51,7 @@ function TodoForm({
   const priorityRef = useRef();
   // const textAreaRef = useRef();
 
-  useEffect(() => {
-    if (!isTodoCredantials) {
-      handleReset();
-    }
-  }, [isTodoCredantials]);
+ 
 
   const handleReset = () => {
     // reset();
@@ -67,6 +63,12 @@ function TodoForm({
       description: "",
     });
   };
+
+   useEffect(() => {
+     if (!isTodoCredantials) {
+       handleReset();
+     }
+   }, [isTodoCredantials]);
 
   useEffect(() => {
     reset({ title, status, priority, deadline, description });
