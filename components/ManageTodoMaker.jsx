@@ -22,9 +22,6 @@ function ManageTodoMaker() {
   const editableTodoId = useSelector((state) => state.todoHandler.editTodoId); 
   const statusTodo = useSelector((state) => state.todoHandler.statusTodo); 
   const dispatch = useDispatch();
-  // const data = useSelector((state) => state.todoData.todos || []);
-  // // console.log("Todooos",data)
-  // // data?.map((d) => console.log(d["_id"]))
  const [taskData, setTaskData] = useState({});
  const [isEditable, setIsEditable] = useState(false);
 
@@ -44,7 +41,7 @@ function ManageTodoMaker() {
      return res.json();
 
      const responseData = await res.json();
-     console.log("Here", responseData);
+   
      return responseData.data; // Ensure this is the correct path to data
    } catch (error) {
      console.error("Error in fetchUserData:", error);
@@ -59,7 +56,7 @@ function ManageTodoMaker() {
 
        const todo = await fetchUserData(editableTodoId); // Await the data
 
-       console.log("Todos", todo.todo);
+     
        if (todo) {
          setTaskData(todo.todo); // Correctly set the state
        } else {
@@ -72,7 +69,7 @@ function ManageTodoMaker() {
 
    loadData();
 
-   console.log("task",taskData)
+  
  }, [editableTodoId]);
 
   

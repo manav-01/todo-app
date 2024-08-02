@@ -28,10 +28,9 @@ export default function RegisterForm() {
     }, [email, password, fullName]);
 
     const SignInSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
 
         try {
-          console.log("Start \n");
           
           const createUserRes = await fetch("api/register",{
             method: "POST",
@@ -47,7 +46,6 @@ export default function RegisterForm() {
 
           const apiResponse= await createUserRes.json();
 
-          console.log("createUserRes \n", createUserRes.ok);
           if(createUserRes.ok) {
             setValue("fullName","");
             setValue("email","");
@@ -61,7 +59,7 @@ export default function RegisterForm() {
               });
 
               const res = signIpRes;
-              console.log("signIpRes", res);
+              // console.log("signIpRes", res);
 
               if (signIpRes.error) {
                 setError(`Invalid Credentials : ${signIpRes.error}`);

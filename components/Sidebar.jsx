@@ -9,12 +9,24 @@ import TeamImg from "/assert/dashboard/sidebar/teams.png";
 import AnalyticsImg from "/assert/dashboard/sidebar/analytics.png";
 import NewTaskImg from "/assert/dashboard/sidebar/new-task-pluse.png";
 import DownloadImg from "/assert/dashboard/sidebar/downlaod.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateCredantials } from "@/featured/todoHandlerSlice";
+import { logout } from "@/featured/authSlice";
 import { signOut } from "next-auth/react";
 
 function Sidebar() {
-  const dispatch = useDispatch();
+   const name = useSelector(
+     (state) => state.auth.userData?.fullName || "Joe Gardner"
+   );
+   const dispatch = useDispatch();
+
+   function capitalizeWords(str) {
+     return str
+       .split(" ")
+       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+       .join(" ");
+   }
+
 
    const btnEventHandler = (e) => {
      e.preventDefault();
@@ -23,9 +35,16 @@ function Sidebar() {
      try {
        dispatch(updateCredantials({ statusTodo, isCreateTodo }));
      } catch (error) {
-       console.log();
+       console.log(error);
      }
    };
+
+   const logOutHandler = () => {
+    dispatch(logout())
+    signOut();
+   }
+
+
   return (
     <aside className="fixed top-0 left-0 bottom-0 py-3 px-4 max-w-md w-[260px] bg-sidebar-gb flex flex-col justify-between">
       <div className="flex flex-col gap-3">
@@ -38,7 +57,9 @@ function Sidebar() {
               className="object-cover object-top w-10 h-10 rounded-xl"
               alt="avatar"
             />
-            <span className="text-2xl font-medium text-black">Joe Gardner</span>
+            <span className="text-2xl font-medium text-black">
+              {capitalizeWords(name)}
+            </span>
           </div>
           <div className="flex justify-between items-center">
             <div className="flex gap-4">
@@ -49,7 +70,7 @@ function Sidebar() {
             <button
               className="p-2 bg-active-bg rounded-md px-2"
               type="button"
-              onClick={() => signOut()}
+              onClick={logOutHandler}
             >
               Logout
             </button>

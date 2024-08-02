@@ -18,7 +18,7 @@ function TodoSection() {
     try {
       dispatch(updateCredantials({ statusTodo, isCreateTodo }));
     } catch (error) {
-      console.log()
+      console.log(error)
     }
   };
 

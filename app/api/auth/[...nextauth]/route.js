@@ -29,13 +29,13 @@ export const authOptions = {
             return null;
           }
 
-          console.log("Pre Hello statement");
+         
 
 
 
           const isPasswordValid = await user.isPasswordCorrect(password);
 
-          console.log("Password check", isPasswordValid);
+          
           if (!isPasswordValid) {
             return null;
              
@@ -48,7 +48,7 @@ export const authOptions = {
           //   " -password "
           // );
 
-          // // console.log("User",loggedInUser);
+         
 
           // return  loggedInUser;
 

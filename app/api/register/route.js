@@ -20,7 +20,7 @@ export async function POST(req) {
         { status: 500 }
       );});
       
-      // console.log("After db connect", connection)
+     
 
 
     const existUser = await User.findOne( { email });

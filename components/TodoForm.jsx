@@ -35,7 +35,6 @@ function TodoForm({
     (state) => state.todoHandler.isCreateTodo
   );
   const userId = useSelector((state) => state.auth?.userData?.id);
-  // console.log("User id", userId);
 
   const { register, handleSubmit, reset, control, getValues } = useForm({
     defaultValues: {
@@ -72,17 +71,12 @@ function TodoForm({
   useEffect(() => {
     reset({ title, status, priority, deadline, description });
   }, [title, status, priority, deadline, description, reset]);
-  //  console.log(status);
 
   // Add data On Database or Update
 
   const onSubmit = async (data) => {
-    console.log(data);
-    console.log("Update is avilabel", isEditabel);
 
     if (isEditabel) {
-      console.log(isEditabel);
-      console.log("Todo Id",todoId);
 
       if ((!title, !status, !priority, !deadline, !description)) {
         console.log("All Fields are rquired");
@@ -111,7 +105,7 @@ function TodoForm({
       }
     } else {
       if ((!title, !status, !priority, !deadline, !description)) {
-        console.log("All Fields are rquired");
+        console.log("All Fields are required");
       }
 
       try {

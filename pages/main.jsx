@@ -30,19 +30,40 @@ const fetchUserData = async (email) => {
 };
 
 // Function to fetch all data
-const fetchAllData = async () => {
+// const fetchAllData = async () => {
+//   try {
+//     const res = await fetch("api/todohandler", {
+//       method: "GET",
+//       headers: { "Content-Type": "application/json" },
+//       cache: "no-store",
+//     });
+
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch topics");
+//     }
+
+//     return res.json();
+//   } catch (error) {
+//     console.error("Error in fetchAllData:", error);
+//   }
+// };
+
+// Function to fetch all data
+
+const fetchAllData = async (userId) => {
   try {
-    const res = await fetch("api/todohandler", {
-      method: "GET",
+    const res = await fetch("api/todohandler/todos", {
+      method: "Post",
       headers: { "Content-Type": "application/json" },
       cache: "no-store",
+      body: JSON.stringify({ userId }),
     });
 
     if (!res.ok) {
       throw new Error("Failed to fetch topics");
     }
 
-    return res.json();
+    return  res.json();
   } catch (error) {
     console.error("Error in fetchAllData:", error);
   }
@@ -54,6 +75,8 @@ const TodoComponent = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth?.userData?.id);
   const emailData = session?.user?.email;
+
+    console.log(userId);
 
   // Fetch and set user data based on email
   useEffect(() => {
@@ -71,18 +94,21 @@ const TodoComponent = () => {
   useEffect(() => {
     if (userData) {
       dispatch(login({ ...userData, id: userData["_id"] }));
+    
     } else {
       dispatch(logout());
     }
   }, [userData, dispatch]);
 
   // Fetch and dispatch all todo data
+
   useEffect(() => {
     if (userId) {
       const fetchData = async () => {
-        const data = await fetchAllData();
+        const data = await fetchAllData(userId);
+        console.log("data",data.todos)
         if (data) {
-          dispatch(addData(data.todoData));
+          dispatch(addData(data.todos));
         }
       };
 

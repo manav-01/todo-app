@@ -21,7 +21,7 @@ function FunctionCard() {
      try {
        dispatch(updateCredantials({ statusTodo, isCreateTodo }));
      } catch (error) {
-       console.log();
+      
      }
    };
 

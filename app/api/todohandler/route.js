@@ -31,7 +31,7 @@ export async function PUT(request) {
   const {todoId, userId, title, status, priority, deadline, description } =
    await request.json();
 
-    console.log("PUT",todoId, userId, title, status, priority, deadline, description);
+   
 
   await connectDB();
 

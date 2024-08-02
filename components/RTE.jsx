@@ -19,10 +19,7 @@ export default function RTE({ name, control, defaultValue = "" }) {
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
-            apiKey={
-              process.env.TINYMCE_API_KEY ||
-              "7j4tnmqbxjyl7biqru758tnbe2ux5ltdz0tnv8q7e3svc5rq"
-            }
+            apiKey={`${process.env.NEXT_PUBLIC_TINYMCE_API_KEY}`}
             initialValue={defaultValue}
             onInit={(evt, editor) => (editorRef.current = editor)}
             init={{

@@ -13,8 +13,6 @@ function TodoCard({_id,title,description,priority,deadline,updatedAt}) {
 
   const onEditeHandler = (e) => {
     e.preventDefault();
-    // console.log(e)
-    // console.log(editId.current.dataset.todoid);
     dispatch(
       updateCredantials({
         editTodoId: editId.current?.dataset?.todoid,
