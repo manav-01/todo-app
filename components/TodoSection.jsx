@@ -8,7 +8,7 @@ import { updateCredantials } from '@/featured/todoHandlerSlice';
 
 function TodoSection() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.todoData.todos || []);
+  const data = useSelector((state) => state.todoData?.todos || []);
   
 
   const btnEventHandler = (e) =>{
