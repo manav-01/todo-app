@@ -1,69 +1,28 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Image from 'next/image'
 import TodoCard from './TodoCard';
 import newTaskPluse from "/assert/dashboard/sidebar/new-task-pluse.png";
 import shorDataImg from "/assert/dashboard/main/end-shower.png"
-import Link from 'next/link';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCredantials } from '@/featured/todoHandlerSlice';
 
 function TodoSection() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.todoData.todos || []);
+  
 
-    const data = [
-      {
-        _id: 1,
-        status: "To do",
-        title: "Implement User Authentication",
-        description:
-          "Develop and integrate user authentication using email and password.",
-        priority: "urgent",
-        deadline: "2024-08-15",
-        updatedAt: "1 hr ago",
-      },
+  const btnEventHandler = (e) =>{
+    e.preventDefault();
+    const isCreateTodo = true;
+    const statusTodo = e.target.dataset.status ?? ""; 
+    try {
+      dispatch(updateCredantials({ statusTodo, isCreateTodo }));
+    } catch (error) {
+      console.log()
+    }
+  };
 
-      {
-        _id: 2,
-        status: "In Progress",
-        title: "Design Home Page UI",
-        description:
-          "Develop and integrate user authentication using email and password.",
-        priority: "medium",
-        deadline: "2024-08-15",
-        updatedAt: "1 hr ago",
-      },
-
-      {
-        _id: 3,
-        status: "In Progress",
-        title: "Conduct User Feedback Survey",
-        description:
-          "Collect and analyze user feedback to improve app features.",
-        priority: "low",
-        deadline: "2024-08-15",
-        updatedAt: "3 hr ago",
-      },
-
-      {
-        _id: 4,
-        status: "Under View",
-        title: "Integrate Cloud Storage",
-        description:
-          "Enable cloud storage for note backup and synchronization.",
-        priority: "urgent",
-        deadline: "2024-08-20",
-        updatedAt: "2 days ago",
-      },
-
-      {
-        _id: 5,
-        status: "Finished",
-        title: "Test Cross-browser Compatibility",
-        description:
-          "Ensure the app works seamlessly across different web browsers.",
-        priority: "urgent",
-        deadline: "2024-08-18",
-        updatedAt: "4 days ago",
-      },
-    ];
+   
 
   return (
     <div class="grid grid-flow-row grid-cols-4 gap-4 bg-white p-3 rounded-md mb-4">
@@ -86,9 +45,11 @@ function TodoSection() {
 
         {/* <!-- Add New Component  --> */}
         <button
+         
           class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
           type="submit"
-          statusData="To do"
+          data-status="To do"
+          onClick={btnEventHandler}
         >
           Add new
           <Image src={newTaskPluse} alt="new task" />
@@ -113,9 +74,11 @@ function TodoSection() {
 
         {/* <!-- Button of Add New Component  --> */}
         <button
+          
           class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
           type="submit"
-          statusData="In Progress"
+          data-status="In Progress"
+          onClick={btnEventHandler}
         >
           Add new
           <Image src={newTaskPluse} alt="new task" />
@@ -132,7 +95,7 @@ function TodoSection() {
         <div id="under_view_loader" class="flex flex-col gap-4">
           {/* <!-- Component of card  --> */}
           {data?.map((todo) => {
-            if (todo.status === "Under View") {
+            if (todo.status === "Under Review") {
               return <TodoCard {...todo} />;
             }
           })}
@@ -140,9 +103,11 @@ function TodoSection() {
 
         {/* <!-- Add New Component  --> */}
         <button
+          
           class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
           type="submit"
-          statusData="Under View"
+          data-status="Under Review"
+          onClick={btnEventHandler}
         >
           Add new
           <Image src={newTaskPluse} alt="new task" />
@@ -168,16 +133,16 @@ function TodoSection() {
 
         {/* <!-- Add New Component  --> */}
 
-        <Link href={`/editTopic/12`}>
-          <button
-            class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
-            type="submit"
-            statusData="Finished"
-          >
-            Add new
-            <Image src={newTaskPluse} alt="new task" />
-          </button>
-        </Link>
+        <button
+          
+          class="w-full outline-none flex bg-add-btn text-white p-2 items-center justify-between gap-2 rounded-md"
+          type="submit"
+          data-status="Finished"
+          onClick={btnEventHandler}
+        >
+          Add new
+          <Image src={newTaskPluse} alt="new task" />
+        </button>
       </div>
     </div>
   );

@@ -9,9 +9,23 @@ import TeamImg from "/assert/dashboard/sidebar/teams.png";
 import AnalyticsImg from "/assert/dashboard/sidebar/analytics.png";
 import NewTaskImg from "/assert/dashboard/sidebar/new-task-pluse.png";
 import DownloadImg from "/assert/dashboard/sidebar/downlaod.png";
+import { useDispatch } from "react-redux";
+import { updateCredantials } from "@/featured/todoHandlerSlice";
+import { signOut } from "next-auth/react";
 
+function Sidebar() {
+  const dispatch = useDispatch();
 
-function Sidebar({}) {
+   const btnEventHandler = (e) => {
+     e.preventDefault();
+     const isCreateTodo = true;
+     const statusTodo = e.target.dataset.status ?? "";
+     try {
+       dispatch(updateCredantials({ statusTodo, isCreateTodo }));
+     } catch (error) {
+       console.log();
+     }
+   };
   return (
     <aside className="fixed top-0 left-0 bottom-0 py-3 px-4 max-w-md w-[260px] bg-sidebar-gb flex flex-col justify-between">
       <div className="flex flex-col gap-3">
@@ -32,7 +46,11 @@ function Sidebar({}) {
               <Image src={UpdateStatusImage} alt="update status" />
               <Image src={MoreInfoImg} alt="more info" />
             </div>
-            <button className="p-2 bg-active-bg rounded-md px-2" type="button">
+            <button
+              className="p-2 bg-active-bg rounded-md px-2"
+              type="button"
+              onClick={() => signOut()}
+            >
               Logout
             </button>
           </div>
@@ -63,6 +81,8 @@ function Sidebar({}) {
           <button
             className="create-task outline-none flex bg-bg-sub-btn text-white p-2 items-center justify-center gap-2 rounded-md"
             type="submit"
+            data-status=""
+            onClick={btnEventHandler}
           >
             Create new task
             <Image src={NewTaskImg} alt="new task" />

@@ -1,5 +1,5 @@
-"use client"
-import React, { useRef } from "react";
+// "use client"
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import StatusImg from "/assert/dashboard/task_model/status.png";
@@ -11,25 +11,130 @@ import NewTaskImg from "/assert/dashboard/sidebar/new-task-pluse.png";
 import AutoExpandTextarea from "./AutoExpandTextarea";
 import Select from "./Select";
 import Input from "./Input";
+import RTE from "./RTE";
+import { useDispatch,useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import { updateCredantials } from "@/featured/todoHandlerSlice";
 
-function TodoForm({isEditabel= false , title, status, priority, deadline, description }) {
-  const { register, handleSubmit } = useForm({
+function TodoForm({
+  isEditabel = false,
+  title,
+  status,
+  priority,
+  deadline,
+  description,
+  todoId,
+}) {
+  const Router = useRouter();
+  const dispatch = useDispatch();
+
+  const isTodoEditable = useSelector((state) => {
+    state.todoHandler.editTodoId;
+  });
+  const isTodoCredantials = useSelector(
+    (state) => state.todoHandler.isCreateTodo
+  );
+  const userId = useSelector((state) => state.auth?.userData?.id);
+  // console.log("User id", userId);
+
+  const { register, handleSubmit, reset, control, getValues } = useForm({
     defaultValues: {
       title: title || "",
-      status: status || "" ,
+      status: status || "",
       priority: priority || "",
       deadline: deadline || "",
-      description: description || "" ,
+      description: description || "",
     },
   });
+
   const inputRef = useRef();
   const statusRef = useRef();
   const priorityRef = useRef();
-  const textAreaRef = useRef();
+  // const textAreaRef = useRef();
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  useEffect(() => {
+    if (!isTodoCredantials) {
+      handleReset();
+    }
+  }, [isTodoCredantials]);
+
+  const handleReset = () => {
+    // reset();
+    reset({
+      title: "",
+      status: "",
+      priority: "",
+      deadline: "",
+      description: "",
+    });
+  };
+
+  useEffect(() => {
+    reset({ title, status, priority, deadline, description });
+  }, [title, status, priority, deadline, description, reset]);
+  //  console.log(status);
+
+  // Add data On Database or Update
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    console.log("Update is avilabel", isEditabel);
+
+    if (isEditabel) {
+      console.log(isEditabel);
+      console.log("Todo Id",todoId);
+
+      if ((!title, !status, !priority, !deadline, !description)) {
+        console.log("All Fields are rquired");
+      }
+
+      try {
+        const res = await fetch(`/api/todohandler`, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ ...data, userId, todoId }),
+        });
+
+        if (res.ok) {
+          const isCreateTodo = false;
+          const editTodoId = null;
+          dispatch(updateCredantials({ isCreateTodo }));
+          dispatch(updateCredantials({ editTodoId }));
+          Router.push("/");
+        } else {
+          throw new Error("Failed to update a Todo Task");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      if ((!title, !status, !priority, !deadline, !description)) {
+        console.log("All Fields are rquired");
+      }
+
+      try {
+        const res = await fetch("api/todohandler", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ ...data, userId }),
+        });
+
+        if (res.ok) {
+          const isCreateTodo = false;
+          dispatch(updateCredantials({ isCreateTodo }));
+          Router.push("/");
+        } else {
+          throw new Error("Failed to create a Todo Task");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -100,10 +205,15 @@ function TodoForm({isEditabel= false , title, status, priority, deadline, descri
           />
           <label>Description</label>
         </div>
-        <AutoExpandTextarea
+        {/* <AutoExpandTextarea
           className="bg-transparent outline-none pl-2 w-full text-justify"
           ref={textAreaRef}
           {...register("description", { required: true })}
+        /> */}
+        <RTE
+          name="description"
+          control={control}
+          defaultValue={getValues("description")}
         />
       </div>
 
@@ -116,14 +226,24 @@ function TodoForm({isEditabel= false , title, status, priority, deadline, descri
           <Image src={AddImg} alt="add custom property" />
           Add custom property
         </button>
+        <div className="flex items-center justify-start gap-1 m-4">
+          <button
+            className="create-task outline-none flex bg-bg-sub-btn text-white p-2 items-center justify-center gap-2 rounded-md"
+            type="submit"
+          >
+            {isEditabel ? "Upadet task" : "Create new task"}
+            <Image src={NewTaskImg} alt="new task" />
+          </button>
 
-        <button
-          className="create-task outline-none flex bg-bg-sub-btn text-white p-2 items-center justify-center gap-2 rounded-md"
-          type="submit"
-        >
-          {isEditabel ? "Upadet task" : "Create new task" }
-          <Image src={NewTaskImg} alt="new task" />
-        </button>
+          <button
+            className="create-task outline-none flex bg-bg-sub-btn text-white p-2 items-center justify-center gap-2 rounded-md"
+            type="button"
+            onClick={handleReset}
+          >
+            Reset task
+            <Image src={NewTaskImg} alt="new task" />
+          </button>
+        </div>
       </div>
     </form>
   );

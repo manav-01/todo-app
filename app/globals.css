@@ -82,5 +82,14 @@ body {
   overflow-y: auto;
 }
 
+.hover-content {
+  display: none; /* Initially hide the buttons */
+}
+
+.hover-trigger:hover .hover-content {
+  display: flex; /* Show the buttons on hover */
+}
+
+
 }
 

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-        createTodo : false,
+        isCreateTodo : false,
         statusTodo : "",
         editTodoId : null,
 }
@@ -11,7 +11,7 @@ const todoHandlerSlice = createSlice({
         initialState,
         reducers: {
                 updateCredantials : (state, action) =>{
-                        state.createTodo = action.payload.createTodo ?? false;
+                        state.isCreateTodo = action.payload.isCreateTodo ?? false;
                         state.statusTodo = action.payload.statusTodo ?? "";
                         state.editTodoId = action.payload.editTodoId ?? null;
                 }

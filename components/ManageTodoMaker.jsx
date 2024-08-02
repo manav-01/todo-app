@@ -1,3 +1,4 @@
+// "use client"
 import React from "react";
 import Image from "next/image";
 import CancelImg from "/assert/dashboard/task_model/cancel.png";
@@ -11,18 +12,109 @@ import DescriptionImg from "/assert/dashboard/task_model/description.png";
 import AddImg from "/assert/dashboard/task_model/add.png";
 import NewTaskImg from "/assert/dashboard/sidebar/new-task-pluse.png";
 import TodoForm from "./TodoForm";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { updateCredantials } from "@/featured/todoHandlerSlice";
 
 function ManageTodoMaker() {
   
+  const createTodo = useSelector((state) => state.todoHandler.isCreateTodo); 
+  const editableTodoId = useSelector((state) => state.todoHandler.editTodoId); 
+  const statusTodo = useSelector((state) => state.todoHandler.statusTodo); 
+  const dispatch = useDispatch();
+  // const data = useSelector((state) => state.todoData.todos || []);
+  // // console.log("Todooos",data)
+  // // data?.map((d) => console.log(d["_id"]))
+ const [taskData, setTaskData] = useState({});
+ const [isEditable, setIsEditable] = useState(false);
+
+ const fetchUserData = async (id) => {
+   try {
+     const res = await fetch("api/todo", {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({ id }),
+     });
+
+     if (!res.ok) {
+       console.error("Error fetching user data");
+       return null;
+     }
+
+     return res.json();
+
+     const responseData = await res.json();
+     console.log("Here", responseData);
+     return responseData.data; // Ensure this is the correct path to data
+   } catch (error) {
+     console.error("Error in fetchUserData:", error);
+     return null;
+   }
+ };
+
+ useEffect(() => {
+   const loadData = async () => {
+     if (editableTodoId) {
+       setIsEditable(true);
+
+       const todo = await fetchUserData(editableTodoId); // Await the data
+
+       console.log("Todos", todo.todo);
+       if (todo) {
+         setTaskData(todo.todo); // Correctly set the state
+       } else {
+         console.error("Todo not found or error in fetching");
+       }
+     } else {
+       setIsEditable(false);
+     }
+   };
+
+   loadData();
+
+   console.log("task",taskData)
+ }, [editableTodoId]);
+
+  
+
+  // close tab button function
+  const closeTabButton = () => {
+    try {
+      const isCreateTodo = false;
+      dispatch(updateCredantials({ isCreateTodo, editTodoId:null }));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function formatDate(dateString) {
+    // Create a new Date object from the input date string
+    const date = new Date(dateString);
+
+    // Extract the year, month, and day from the Date object
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Months are 0-indexed, so we add 1
+    const day = String(date.getUTCDate()).padStart(2, "0");
+
+    // Combine year, month, and day into the desired format
+    return `${year}-${month}-${day}`;
+  }
+
+  
+  
   return (
     //  <!-- Task Model  -->
-    <aside className=" fixed top-0 right-0 bottom-0 w-2/5  p-4 bg-sidebar-gb transition-all ease-in-out  duration-130 overflow-y-auto">
+    <aside
+      className={`${
+        createTodo ? "" : "hidden"
+      } z-10 fixed top-0 right-0 bottom-0 w-2/5  p-4 bg-sidebar-gb transition-all ease-in-out  duration-130 overflow-y-auto`}
+    >
       <div className="flex justify-between mb-6">
         <div className="flex gap-1 justify-center items-center">
-          <a href="/">
+          <button href="/" onClick={closeTabButton}>
             <Image src={CancelImg} alt="Cancel" />
             {/* <!-- className="w-8 h-8" --> */}
-          </a>
+          </button>
           <a href="/">
             <Image src={StarchImg} alt="Starch" />
             {/* <!-- className="w-8 h-8" --> */}
@@ -45,7 +137,23 @@ function ManageTodoMaker() {
       {/* <!-- https://jsfiddle.net/M6SM2/488/ --> */}
 
       <div>
-        <TodoForm title={"Hello"} status={"To do"} priority={"low"} deadline={"2024-07-12"} description={""}/>
+
+        {isEditable ? (
+          <TodoForm
+            todoId={taskData?.["_id"]}
+            isEditabel={isEditable}
+            status={statusTodo || taskData?.status || ""}
+            title={taskData?.title || ""}
+            priority={taskData?.priority || ""}
+            deadline={formatDate(taskData?.deadline) || ""}
+            description={taskData?.description || ""}
+          />
+        ) : (
+          <TodoForm
+            isEditabel={isEditable}
+            status={statusTodo || ""}
+          />
+        )}
         {/* <TodoForm title={"Hello"} status={"To do"} priority={"low"} deadline={"2024-07-12"} description={""}/> */}
       </div>
       <div>

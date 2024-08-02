@@ -6,9 +6,25 @@ import AutomationImg from "@/assert/dashboard/main/automation.png";
 import CalanderImg from "@/assert/dashboard/main/calander.png";
 import SearchGlassImg from "@/assert/dashboard/main/search-glass.png";
 import NewTaskPluse from "/assert/dashboard/sidebar/new-task-pluse.png";
+import { useDispatch } from 'react-redux';
+import { updateCredantials } from '@/featured/todoHandlerSlice';
 
 
 function FunctionCard() {
+
+  const dispatch = useDispatch();
+
+   const btnEventHandler = (e) => {
+     e.preventDefault();
+     const isCreateTodo = true;
+     const statusTodo = e.target.dataset.status ?? "";
+     try {
+       dispatch(updateCredantials({ statusTodo, isCreateTodo }));
+     } catch (error) {
+       console.log();
+     }
+   };
+
   return (
     <div class="flex flex-row justify-between items-center mb-4">
       <div class="flex flex-row items-center justify-between px-2 bg-white rounded-md">
@@ -42,12 +58,11 @@ function FunctionCard() {
         <button
           class="create-task outline-none flex bg-bg-sub-btn text-white p-2 items-center justify-center gap-2 rounded-md"
           type="submit"
+          data-status=""
+          onClick={btnEventHandler}
         >
           Create task
-          <Image
-            src={NewTaskPluse}
-            alt="new task"
-          />
+          <Image src={NewTaskPluse} alt="new task" />
         </button>
       </div>
     </div>
