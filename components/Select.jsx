@@ -12,7 +12,7 @@ function Select({name, classname, id, options, ...props},ref) {
     <select
       name={name}
       id={id}
-      className={`bg-transparent ${classname}`}
+      className={`bg-transparent outline-none ${classname}`}
       {...props}
       ref={ref}
     >
@@ -20,7 +20,7 @@ function Select({name, classname, id, options, ...props},ref) {
       {options &&
         options.map((option) => (
           <option value={option} key={option}>
-            {capitalizeFirstWord(option)}
+            {option}
           </option>
         ))}
     </select>
