@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import SignInForm from "@/pages/SignInForm";
+import SignInForm from "@/appPages/SignInForm";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export default async function Home() {
@@ -20,7 +20,7 @@ export default async function Home() {
   );
 }
   
-// import SignInForm from "@/pages/SignInForm";
+// import SignInForm from "@/appPages/SignInForm";
 // import { getServerSession } from "next-auth";
 // import { redirect } from "next/navigation";
 

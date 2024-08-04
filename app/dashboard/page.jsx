@@ -1,5 +1,5 @@
 "use client"
-import Main from "@/pages/main";
+import Main from "@/appPages/main";
 import store from "@/store/store";
 import { Provider } from "react-redux";
 

@@ -4,6 +4,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./appPages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -31,9 +32,9 @@ module.exports = {
         "active-bg": "#F4F4F4",
         "active-bg2": "#F9F9F9",
         "sidebar-gb": "#FFFFFF",
-        "urgent": "#FF6B6B",
-        "medium": "#FFA235",
-        "low": "#0ECC5A",
+        urgent: "#FF6B6B",
+        medium: "#FFA235",
+        low: "#0ECC5A",
         "input-title": "#CCCCCC",
         "input-label": "#666666",
       },
