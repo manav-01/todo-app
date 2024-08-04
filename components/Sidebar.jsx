@@ -40,7 +40,7 @@ function Sidebar() {
    };
 
    const logOutHandler = () => {
-    dispatch(logout())
+    // dispatch(logout());
     signOut();
    }
 
